@@ -38,7 +38,7 @@ class Controller extends BaseController
                 unset($user->pembantuDirektur);
             }
             return $userProfile;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
@@ -59,7 +59,7 @@ class Controller extends BaseController
             }
             unset($user->roles);
             return $userRoles;
-        } catch (Exception $e) {
+        } catch (\Exception $e) {
             return $e->getMessage();
         }
     }
