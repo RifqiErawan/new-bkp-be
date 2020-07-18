@@ -69,4 +69,8 @@ class User extends Model implements AuthenticatableContract, AuthorizableContrac
     public function pembantuDirektur(){
         return $this->hasOne('App\PembantuDirektur');
     }
+
+    public function admin(){
+        return $this->hasOne('App\Admin');
+    }
 }

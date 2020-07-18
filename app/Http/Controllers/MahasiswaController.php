@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use App\User;
 use App\Mahasiswa;
 use App\Konselor;
+use App\Konseling;
 use Tymon\JWTAuth\Facades\JWTAuth;
 use Illuminate\Http\Request;
 use DB;
@@ -78,6 +79,9 @@ class MahasiswaController extends Controller
         try {
             $user = Auth::User();
             $mahasiswa = $user->mahasiswa;
+
+
+
             return $this->apiResponse(200, 'success', ['user' => $mahasiswa]);
         } catch (\Exception $e) {
             return $this->apiResponse(201, $e->getMessage(), null);

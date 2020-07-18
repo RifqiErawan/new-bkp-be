@@ -1,9 +1,9 @@
 <?php
 
 use Illuminate\Database\Seeder;
-use App\PembantuDirektur;
+use App\Admin;
 
-class PembantuDirekturTableSeeder extends Seeder
+class AdminTableSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,13 +12,13 @@ class PembantuDirekturTableSeeder extends Seeder
      */
     public function run()
     {
-        $pd3 = [
+        $admins = [
             [
               'user_id' => 1,
               'nama' => 'Nama Admin'],
         ];
-        foreach ($pd3 as $pd3Item) {
-            PembantuDirektur::create($pd3Item);
+        foreach ($admins as $admin) {
+            Admin::create($admin);
         }
     }
 }
