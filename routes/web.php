@@ -83,14 +83,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         $router->post('/konselor', [
             'as' => 'api.konseling.konselor', 'uses' => 'KonselingController@getOneByKonselor'
         ]);
-
         $router->put('/updatebymahasiswa', [
             'as' => 'api.konseling.updateByMahasiswa', 'uses' => 'KonselingController@updateByMahasiswa'
         ]);
         $router->put('/updatebykonselor', [
             'as' => 'api.konseling.updateByKonselor', 'uses' => 'KonselingController@updateByKonselor'
         ]);
-
     });
 
 
