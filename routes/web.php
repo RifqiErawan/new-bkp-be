@@ -112,4 +112,10 @@ $router->group(['prefix' => 'api'], function () use ($router) {
             'as' => 'api.jurusan.all', 'uses' => 'JurusanController@getAll'
         ]);
     });
+
+    $router->group(['prefix' => 'konselor'], function () use ($router) {
+        $router->get('/all', [
+            'as' => 'api.jurusan', 'uses' => 'KonselorController@getAll'
+        ]);
+    });
 });

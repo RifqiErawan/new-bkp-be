@@ -17,8 +17,8 @@ class KonselorController extends Controller
      */
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('role:konselor',['except' => ['getAll']]);
+        // $this->middleware('auth');
+        // $this->middleware('role:konselor',['except' => ['getAll']]);
     }
 
     public function getAll(){
