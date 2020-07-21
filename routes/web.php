@@ -60,10 +60,28 @@ $router->group(['prefix' => 'api'], function () use ($router) {
         ]);
         $router->post('/konseling/store', 'KonselingController@store');
         $router->get('/konseling', [
-            'as' => 'api.mahasiswa.konseling', 'uses' => 'KonselingController@konseling'
+            'as' => 'api.mahasiswa.konseling', 'uses' => 'KonselingController@getOneByMahasiswa'
         ]);
         $router->get('/konselor', [
             'as' => 'api.konselor.getAll', 'uses' => 'MahasiswaController@getAllKonselor'
+        ]);
+    });
+
+    $router->group(['prefix' => 'pd3'], function () use ($router) {
+        $router->get('/konseling', [
+            'as' => 'api.pd3.konseling', 'uses' => 'PDController@getDataKonseling'
+        ]);
+        // $router->get('/konselor', [
+        //     'as' => 'api.pd3.konselor', 'uses' => 'PDController@getKonselor'
+        // ]);
+        // $router->get('/mahasiswa', [
+        //     'as' => 'api.pd3.mahasiswa', 'uses' => 'PDController@getMahasiswa'
+        // ]);
+        $router->post('/tahunan', [
+            'as' => 'api.pd3.tahunan', 'uses' => 'PDController@getDataTahunan'
+        ]);
+        $router->post('/bulanan', [
+            'as' => 'api.pd3.bulanan', 'uses' => 'PDController@getDataBulanan'
         ]);
     });
 

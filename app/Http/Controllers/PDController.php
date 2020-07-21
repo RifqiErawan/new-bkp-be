@@ -2,11 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\KategoriMasalah;
 use Illuminate\Support\Facades\Auth;
 use App\Mahasiswa;
+use App\Konseling;
 use Illuminate\Http\Request;
 use DB;
-
+use Carbon\Carbon;
 
 class PDController extends Controller
 {
@@ -20,4 +22,94 @@ class PDController extends Controller
         $this->middleware('auth');
         $this->middleware('role:pd3');
     }
+
+    public function getDataTahunan(Request $request){
+        Carbon::setLocale('id');
+
+        $startDate = 0;
+        $endDate = 0;
+
+        if(!$request->has('year')){
+            $startDate = Carbon::now()->copy()->startOfYear();
+            $endDate = Carbon::now()->copy()->endOfYear();
+        }
+        else {
+            $startDate = Carbon::createFromDate($request->year)->copy()->startOfYear();
+            $endDate = Carbon::createFromDate($request->year)->copy()->endOfYear();
+        }
+
+        $dataKonseling = Konseling::whereBetween('waktu_mulai', [$startDate,$endDate])->get();
+
+        $dataPerstatus = (object)[];
+        $dataPerstatus->created = $dataKonseling->where('status','created')->count();
+        $dataPerstatus->approved = $dataKonseling->where('status','approved')->count();
+        $dataPerstatus->succeed = $dataKonseling->where('status','succeed')->count();
+        $dataPerstatus->canceled = $dataKonseling->where('status','canceled')->count();
+
+        $jumlahKategori = KategoriMasalah::get()->count();
+        $dataPerkategori = (object)[];
+
+        for ($i = 0; $i <= $jumlahKategori; $i = $i + 1){
+            $dataPerkategori->$i = $dataKonseling->where('kategori_id',$i)->count();
+        }
+
+        $result = (object)[];
+        $result->start_time = $startDate;
+        $result->end_time = $endDate;
+        $result->jumlah_keseluruhan = $dataKonseling->count();
+        $result->jumlah_perstatus = $dataPerstatus;
+        $result->jumlah_perkategori = $dataPerkategori;
+        $result->kategori = KategoriMasalah::get();
+
+        // $time = new Request([
+        //     'year' => $request->year,
+        //     'month' => 2
+        // ]);
+
+        // $result->bulanan = app('App\Http\Controllers\PDController')->getDataBulanan($time)->result->jumlah_keseluruhan;
+
+        return $this->apiResponse(200,"Success",$result);
+    }
+
+    public function getDataBulanan(Request $request){
+        Carbon::setLocale('id');
+
+        $startDate = 0;
+        $endDate = 0;
+
+        if(!$request->has('month')){
+            $startDate = Carbon::now()->copy()->startOfMonth();
+            $endDate = Carbon::now()->copy()->endOfMonth();
+        }
+        else {
+            $startDate = Carbon::createFromDate($request->year,$request->month)->copy()->startOfMonth();
+            $endDate = Carbon::createFromDate($request->year,$request->month)->copy()->endOfMonth();
+        }
+
+        $dataKonseling = Konseling::whereBetween('waktu_mulai', [$startDate,$endDate])->get();
+
+        $dataPerstatus = (object)[];
+        $dataPerstatus->created = $dataKonseling->where('status','created')->count();
+        $dataPerstatus->approved = $dataKonseling->where('status','approved')->count();
+        $dataPerstatus->succeed = $dataKonseling->where('status','succeed')->count();
+        $dataPerstatus->canceled = $dataKonseling->where('status','canceled')->count();
+
+        $jumlahKategori = KategoriMasalah::get()->count();
+        $dataPerkategori = (object)[];
+
+        for ($i = 0; $i <= $jumlahKategori; $i = $i + 1){
+            $dataPerkategori->$i = $dataKonseling->where('kategori_id',$i)->count();
+        }
+
+        $result = (object)[];
+        $result->start_time = $startDate;
+        $result->end_time = $endDate;
+        $result->jumlah_keseluruhan = $dataKonseling->count();
+        $result->jumlah_perstatus = $dataPerstatus;
+        $result->jumlah_perkategori = $dataPerkategori;
+        $result->kategori = KategoriMasalah::get();
+
+        return $this->apiResponse(200,"Success",$result);
+    }
+
 }

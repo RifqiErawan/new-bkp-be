@@ -80,8 +80,6 @@ class MahasiswaController extends Controller
             $user = Auth::User();
             $mahasiswa = $user->mahasiswa;
 
-
-
             return $this->apiResponse(200, 'success', ['user' => $mahasiswa]);
         } catch (\Exception $e) {
             return $this->apiResponse(201, $e->getMessage(), null);
