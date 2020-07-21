@@ -36,6 +36,9 @@ class Controller extends BaseController
             } elseif ($user->pembantuDirektur()->exists()) {
                 $userProfile = $user->pembantuDirektur;
                 unset($user->pembantuDirektur);
+            } elseif ($user->admin()->exists()) {
+                $userProfile = $user->admin;
+                unset($user->admin);
             }
             return $userProfile;
         } catch (\Exception $e) {

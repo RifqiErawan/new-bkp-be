@@ -20,14 +20,14 @@ class KonselingController extends Controller
     public function __construct()
     {
         $this->middleware('auth');
-        $this->middleware('role:konselor,mahasiswa',['except' => ['']]);
+        $this->middleware('role:konselor,mahasiswa,pd3',['except' => ['']]);
     }
 
     // Get all schedule
     public function getAll(){
         try{
             // $list_konseling = Konseling::select('id','konselor_id','waktu_mulai','waktu_selesai','status')->get();
-            $list_konseling = Konseling::with('konselor')->get(['waktu_mulai', 'waktu_selesai', 'konselor_id', 'status']);
+            $list_konseling = Konseling::with('konselor')->get(['mhs_id', 'waktu_mulai', 'waktu_selesai', 'konselor_id', 'status']);
             return $this->apiResponse(200, 'success', ['list_konseling' => $list_konseling]);
         }catch (\Exception $e) {
             return $this->apiResponse(201, $e->getMessage(), null);
