@@ -28,12 +28,13 @@ class CreateKonselingTable extends Migration
             $table->string('tempat', 30)->nullable();
             $table->text('keterangan')->nullable();
             // Status
-            $table->enum('status',['created','approved','canceled','rescheduled','succeed'])->default('created');
+            $table->enum('status',['created','approved','canceled','rescheduled-by-counselor','rescheduled-by-student','succeed'])->default('created');
             // Laporan
             $table->unsignedBigInteger('kategori_id')->nullable();
             $table->foreign('kategori_id')->references('id')->on('kategori_masalah');
             $table->text('laporan_teks')->nullable();
-            $table->text('laporan_gambar')->nullable();
+            $table->string('laporan_gambar')->nullable();
+            $table->integer('attempt')->nullable();
             $table->timestamps();
         });
     }

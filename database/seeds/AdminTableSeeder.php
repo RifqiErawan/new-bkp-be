@@ -15,7 +15,7 @@ class AdminTableSeeder extends Seeder
         $admins = [
             [
               'user_id' => 1,
-              'nama' => 'Nama Admin'],
+              'nama' => 'Admin BKP'],
         ];
         foreach ($admins as $admin) {
             Admin::create($admin);

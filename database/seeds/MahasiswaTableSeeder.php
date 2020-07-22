@@ -14,7 +14,7 @@ class MahasiswaTableSeeder extends Seeder
     {
         $mahasiswa = [
             ['nim' => '171511019',
-            'nama' => 'Muhamad Wahyu Maulana Akbar',
+            'nama' => 'Akbar Ginanjar',
             'program_studi_id' => 22,
             'user_id' => 7,
             'tempat_lahir' => 'Cirebon',
@@ -29,7 +29,7 @@ class MahasiswaTableSeeder extends Seeder
             'angkatan' =>2017],
 
             ['nim' => '171511026',
-            'nama' => 'Rifqi Oktabhiar Erawan',
+            'nama' => 'Beno Riyanto Putra',
             'program_studi_id' => 24,
             'user_id' => 8,
             'tempat_lahir' => 'Bandung',
@@ -44,12 +44,12 @@ class MahasiswaTableSeeder extends Seeder
             'angkatan' =>2017],
 
             ['nim' => '171511027',
-            'nama' => 'Mahasiswa Tiga',
+            'nama' => 'Cesillia Amanda',
             'program_studi_id' => 25,
             'user_id' => 9,
             'tempat_lahir' => 'Bandung',
             'tanggal_lahir' => '1998-10-28',
-            'gender' => 'L',
+            'gender' => 'P',
             'semester' => 2,
             'alamat' => 'Bandung',
             'kota' => 'Bandung',
@@ -59,7 +59,7 @@ class MahasiswaTableSeeder extends Seeder
             'angkatan' =>2017],
 
             ['nim' => '171511028',
-            'nama' => 'Mahasiswa Empat',
+            'nama' => 'Deni Alghifari',
             'program_studi_id' => 26,
             'user_id' => 10,
             'tempat_lahir' => 'Bandung',
@@ -74,7 +74,7 @@ class MahasiswaTableSeeder extends Seeder
             'angkatan' =>2017],
 
             ['nim' => '171511029',
-            'nama' => 'Mahasiswa Lima',
+            'nama' => 'Eman Suherman',
             'program_studi_id' => 23,
             'user_id' => 11,
             'tempat_lahir' => 'Bandung',

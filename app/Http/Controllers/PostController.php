@@ -12,8 +12,8 @@ class PostController extends Controller
 {
     public function __construct()
     {
-        $this->middleware('auth');
-        $this->middleware('role:admin');
+        $this->middleware('auth',['except' => ['getAll']]);
+        $this->middleware('role:admin',['except' => ['getAll']]);
     }
 
     public function get(Request $request){

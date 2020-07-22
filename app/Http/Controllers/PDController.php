@@ -23,6 +23,25 @@ class PDController extends Controller
         $this->middleware('role:pd3');
     }
 
+    public function jsonToCSV($json, $cfilename)
+    {
+        $data = json_decode($json, true);
+        $fp = fopen($cfilename, 'w');
+        $header = false;
+        foreach ($data as $row)
+        {
+            if (empty($header))
+            {
+                $header = array_keys($row);
+                fputcsv($fp, $header);
+                $header = array_flip($header);
+            }
+            fputcsv($fp, array_merge($header, $row));
+        }
+        fclose($fp);
+        return;
+    }
+
     public function getDataTahunan(Request $request){
         Carbon::setLocale('id');
 
@@ -40,17 +59,22 @@ class PDController extends Controller
 
         $dataKonseling = Konseling::whereBetween('waktu_mulai', [$startDate,$endDate])->get();
 
+        $this->jsonToCSV(json_encode($dataKonseling),"test.xlsx");
+
         $dataPerstatus = (object)[];
         $dataPerstatus->created = $dataKonseling->where('status','created')->count();
+        $dataPerstatus->created = $dataPerstatus->created + $dataKonseling->where('status','rescheduled-by-counselor')->count();
+        $dataPerstatus->created = $dataPerstatus->created + $dataKonseling->where('status','rescheduled-by-student')->count();
         $dataPerstatus->approved = $dataKonseling->where('status','approved')->count();
         $dataPerstatus->succeed = $dataKonseling->where('status','succeed')->count();
         $dataPerstatus->canceled = $dataKonseling->where('status','canceled')->count();
 
         $jumlahKategori = KategoriMasalah::get()->count();
         $dataPerkategori = (object)[];
+        $kat = array();
 
         for ($i = 0; $i <= $jumlahKategori; $i = $i + 1){
-            $dataPerkategori->$i = $dataKonseling->where('kategori_id',$i)->count();
+            array_push($kat,$dataKonseling->where('kategori_id',$i)->count());
         }
 
         $result = (object)[];
@@ -58,15 +82,8 @@ class PDController extends Controller
         $result->end_time = $endDate;
         $result->jumlah_keseluruhan = $dataKonseling->count();
         $result->jumlah_perstatus = $dataPerstatus;
-        $result->jumlah_perkategori = $dataPerkategori;
+        $result->jumlah_perkategori = $kat;
         $result->kategori = KategoriMasalah::get();
-
-        // $time = new Request([
-        //     'year' => $request->year,
-        //     'month' => 2
-        // ]);
-
-        // $result->bulanan = app('App\Http\Controllers\PDController')->getDataBulanan($time)->result->jumlah_keseluruhan;
 
         return $this->apiResponse(200,"Success",$result);
     }

@@ -15,7 +15,7 @@ class PembantuDirekturTableSeeder extends Seeder
         $pd3 = [
             [
               'user_id' => 12,
-              'nama' => 'Nama Pembantu Direktur III'],
+              'nama' => 'PD III'],
         ];
         foreach ($pd3 as $pd3Item) {
             PembantuDirektur::create($pd3Item);

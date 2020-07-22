@@ -19,6 +19,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('register', 'AuthController@register');
     $router->post('login', 'AuthController@login');
     $router->post('logout', 'AuthController@logout');
+    $router->get('post/all', 'PostController@getAll');
     $router->get('response/{status}/{message}', [
         'uses' => 'Controller@apiResponse'
     ]);
@@ -111,7 +112,7 @@ $router->group(['prefix' => 'api'], function () use ($router) {
 
 
     $router->group(['prefix' => 'program_studi'], function () use ($router) {
-        $router->get('/', [
+        $router->post('/', [
             'as' => 'api.program_studi', 'uses' => 'ProgramStudiController@get'
         ]);
         $router->get('/all', [

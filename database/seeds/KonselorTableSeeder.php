@@ -14,7 +14,7 @@ class KonselorTableSeeder extends Seeder
     {
         $konselorList = [
           ['nip' => '100000111',
-          'nama' => 'Konselor Satu',
+          'nama' => 'Ananda Serena',
           'program_studi_id' => 22,
           'user_id' => 2,
           'tempat_lahir' => 'Bandung',
@@ -24,7 +24,7 @@ class KonselorTableSeeder extends Seeder
           'email' => 'example1@gmail.com'],
 
           ['nip' => '100000112',
-          'nama' => 'Konselor Dua',
+          'nama' => 'Budi Surharjo',
           'program_studi_id' => 23,
           'user_id' => 3,
           'tempat_lahir' => 'Bandung',
@@ -34,7 +34,7 @@ class KonselorTableSeeder extends Seeder
           'email' => 'example2@gmail.com'],
 
           ['nip' => '100000113',
-          'nama' => 'Konselor Tiga',
+          'nama' => 'Calvin Sinaga',
           'program_studi_id' => 24,
           'user_id' => 4,
           'tempat_lahir' => 'Bandung',
@@ -44,7 +44,7 @@ class KonselorTableSeeder extends Seeder
           'email' => 'example3@gmail.com'],
 
           ['nip' => '100000114',
-          'nama' => 'Konselor Empat',
+          'nama' => 'Devi Amara',
           'program_studi_id' => 25,
           'user_id' => 5,
           'tempat_lahir' => 'Bandung',
@@ -54,7 +54,7 @@ class KonselorTableSeeder extends Seeder
           'email' => 'example4@gmail.com'],
 
           ['nip' => '100000115',
-          'nama' => 'Konselor Lima',
+          'nama' => 'Eva Khoirunnisa',
           'program_studi_id' => 26,
           'user_id' => 6,
           'tempat_lahir' => 'Bandung',

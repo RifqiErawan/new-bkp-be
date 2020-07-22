@@ -17,13 +17,13 @@ class KonselorController extends Controller
      */
     public function __construct()
     {
-        // $this->middleware('auth');
-        // $this->middleware('role:konselor',['except' => ['getAll']]);
+        $this->middleware('auth',['except' => ['getAll']]);
+        $this->middleware('role:konselor',['except' => ['getAll']]);
     }
 
     public function getAll(){
        try{
-           $listKonselor = Konselor::all();
+           $listKonselor = Konselor::with('programStudi')->get();
            return $this->apiResponse(200, 'success', ['konselor' => $listKonselor]);
        }catch (\Exception $e) {
            return $this->apiResponse(201, $e->getMessage(), null);
