@@ -59,7 +59,7 @@ class PDController extends Controller
 
         $dataKonseling = Konseling::whereBetween('waktu_mulai', [$startDate,$endDate])->get();
 
-        $this->jsonToCSV(json_encode($dataKonseling),"test.xlsx");
+        $this->jsonToCSV(json_encode($dataKonseling),"laporan-".date('Y').".csv");
 
         $dataPerstatus = (object)[];
         $dataPerstatus->created = $dataKonseling->where('status','created')->count();
@@ -129,4 +129,7 @@ class PDController extends Controller
         return $this->apiResponse(200,"Success",$result);
     }
 
+    public function createLaporan(){
+        return Config::get('constants.api_base_url')."laporan-".date('Y').".csv";
+    }
 }

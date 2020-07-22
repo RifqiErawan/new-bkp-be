@@ -41,7 +41,6 @@ class PostController extends Controller
         $this->validate($request, [
             'title' => 'required|string',
             'body' => 'required|string',
-            'image' => 'required|image',
         ]);
         try{
             $post = new Post;

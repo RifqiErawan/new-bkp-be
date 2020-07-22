@@ -1,0 +1,4 @@
+id,mhs_id,konselor_id,waktu_mulai,waktu_selesai,deskripsi,tempat,keterangan,status,kategori_id,laporan_teks,laporan_gambar,attempt,created_at,updated_at
+1,1,1,"2020-07-01 08:30:00","2020-07-01 09:30:00","Konsultasi masalah kepribadian. Saya sering merasa tidak enak hati.","Ruang BKP",,succeed,1,"Konsultasiberjalan dengan baik. Klien memiliki masalah dengan adaptasi di lingkungan kampus.",,,"2020-07-22 03:19:50","2020-07-22 03:19:50"
+2,3,2,"2020-07-05 08:30:00","2020-07-05 09:30:00","Masalah keluarga serius. Mohon saran dan masukan.","Ruang BKP / Kelas",,created,,,,,"2020-07-22 03:19:50","2020-07-22 03:19:50"
+3,2,1,"2020-08-10 09:45:00","2020-08-10 10:30:00","Ditinggal oleh orang tua. Apa yang harus saya lakukan ?","Ruang BKP / Ruang Jurusan",,created,,,,,"2020-07-22 03:19:50","2020-07-22 03:19:50"
