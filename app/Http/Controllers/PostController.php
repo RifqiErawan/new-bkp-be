@@ -46,9 +46,12 @@ class PostController extends Controller
             $post = new Post;
             $post->fill($request->all());
             if ($request->hasFile('image')) {
+                $file = $request->file('image');
                 $imageUrl = $request->title.'-image-'.time().'.'.$request->image->extension();
-                $request->file('image')->move(('posts'), $imageUrl);
+                $file->move('assets/img/post', $imageUrl);
                 $post->image_url = $imageUrl;
+            } elseif ($request->has('image_url')) {
+                $post->image_url = $request->image_url;
             }
             $post->save();
             return $this->apiResponse(200, 'success', ['post' => $post]);

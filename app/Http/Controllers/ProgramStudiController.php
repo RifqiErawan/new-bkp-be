@@ -12,7 +12,7 @@ class ProgramStudiController extends Controller
         $this->validate($request, [
             'program_studi_id' => 'required|integer',
         ]);
-        try{                        
+        try{
             $programStudi = ProgramStudi::findOrFail($request->program_studi_id);
             return $this->apiResponse(200, 'success', ['program_studi' => $programStudi]);
         }catch (\Exception $e) {
@@ -21,8 +21,8 @@ class ProgramStudiController extends Controller
      }
 
      public function getAll(){
-        try{                        
-            $listProgramStudi = ProgramStudi::all();
+        try{
+            $listProgramStudi = ProgramStudi::orderBy('nama', 'DESC')->get();
             return $this->apiResponse(200, 'success', ['program_studi' => $listProgramStudi]);
         }catch (\Exception $e) {
             return $this->apiResponse(201, $e->getMessage(), null);
@@ -33,7 +33,7 @@ class ProgramStudiController extends Controller
         $this->validate($request, [
             'jurusan_id' => 'required|integer',
         ]);
-        try{                        
+        try{
             $listProgramStudi = ProgramStudi::where('jurusan_id',$request->jurusan_id)->get();
             return $this->apiResponse(200, 'success', ['program_studi' => $listProgramStudi]);
         }catch (\Exception $e) {

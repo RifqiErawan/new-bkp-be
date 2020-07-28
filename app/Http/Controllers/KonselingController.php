@@ -112,11 +112,11 @@ class KonselingController extends Controller
     }
 
     public function updateByKonselor(Request $request){
-        $this->validate($request, [
-            'konseling_id' => 'required|integer',
-            'status' => 'required|string',
-            // 'tempat' => 'required|string',
-        ]);
+        // $this->validate($request, [
+        //     'konseling_id' => 'required|integer',
+        //     'status' => 'required|string',
+        //     // 'tempat' => 'required|string',
+        // ]);
         try{
             $user = Auth::User();
 
@@ -125,12 +125,12 @@ class KonselingController extends Controller
             // if($konseling->status != 'canceled' || $konseling->status != 'succeed'){
                 // $konseling->fill($request->all());
                 $konseling->status = $request->status;
-                // $konseling->kategori_id = $request->kategori_id;
-                // if(!isset($konseling->laporan_teks)){
-                //     $konseling->laporan_teks = '<DITULIS pada ' . date('Y-m-d H:i:s') . '> ' . $request->laporan_teks;
-                // } else {
-                //     $konseling->laporan_teks = $konseling->laporan_teks . '<DIUBAH pada ' . date('Y-m-d H:i:s') . '> ' . $request->laporan_teks;
-                // }
+                $konseling->kategori_id = $request->kategori_id;
+                $konseling->keterangan = $request->keterangan;
+                $konseling->laporan_teks = $request->laporan_teks;
+                if(strcmp( $konseling->laporan_teks, $request->laporan_teks )){
+                    $konseling->attempt = $konseling->attempt + 1;
+                }
                 // if ($request->hasFile('image')) {
                 //     if(isset($konseling->laporan_gambar)) unlink(('laporan/img/'.$post->image_url));
                 //     $imageUrl = $request->title.'-image-'.time().'.'.$request->image->extension();

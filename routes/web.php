@@ -20,13 +20,14 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->post('login', 'AuthController@login');
     $router->post('logout', 'AuthController@logout');
     $router->get('post/all', 'PostController@getAll');
+    $router->post('post', 'PostController@get');
     $router->get('response/{status}/{message}', [
         'uses' => 'Controller@apiResponse'
     ]);
 
     $router->group(['prefix' => 'admin'], function () use ($router) {
         $router->group(['prefix' => 'posts'], function () use ($router) {
-            $router->get('/', 'PostController@get');
+            $router->post('/', 'PostController@get');
             $router->get('/all', 'PostController@getAll');
             $router->post('/store', 'PostController@store');
             $router->put('/update', 'PostController@update');
@@ -135,6 +136,12 @@ $router->group(['prefix' => 'api'], function () use ($router) {
     $router->group(['prefix' => 'konselor'], function () use ($router) {
         $router->get('/all', [
             'as' => 'api.jurusan', 'uses' => 'KonselorController@getAll'
+        ]);
+    });
+
+    $router->group(['prefix' => 'kategori_masalah'], function () use ($router) {
+        $router->get('/', [
+            'as' => 'api.kategori_masalah', 'uses' => 'KategoriMasalahController@getAll'
         ]);
     });
 });
